@@ -10,17 +10,18 @@ import java.util.List;
 public class PvPManager {
 
     private final List<Player> players = new ArrayList<>( );
-    private final SimplePVP plugin;
     private final List<String> disabledWorlds;
 
-    private boolean PVP = true;
+    private boolean PVP;
 
     public PvPManager(SimplePVP plugin, List<String> disabledWorlds) {
-        this.plugin = plugin;
         this.disabledWorlds = disabledWorlds;
     }
     private void addPlayers(Player player) {
         players.add(player);
+    }
+    private void removeWorld(String world) {
+        disabledWorlds.remove(world);
     }
     private void removePlayers(Player player) {
         players.remove(player);
@@ -61,22 +62,20 @@ public class PvPManager {
     /**
      * Enable PvP for all players in the server.
      */
-    public void enablePVPForAll() {
+    public void disablePVPForAll() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (getPlayerPvPStatus(player)) {
                 continue;
             }
             addPlayers(player);
         }
-        setServerPvPStatus(false);
     }
 
     /**
      * Disable PvP for all players in the server.
      */
-    public void disablePVPForAll() {
+    public void enablePVPForAll() {
         players.clear();
-        setServerPvPStatus(true);
     }
 
     /**
