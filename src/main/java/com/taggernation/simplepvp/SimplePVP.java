@@ -11,19 +11,18 @@ import java.io.IOException;
 
 public final class SimplePVP extends JavaPlugin {
 
-    private SimplePVP plugin;
-    private PvPManager pvpManager;
     private ConfigManager config;
     @Override
     public void onEnable() {
-        plugin = this;
+        SimplePVP plugin = this;
         try {
             config = new ConfigManager(plugin, "config.yml", false, true);
         } catch (IOException e) {
             e.printStackTrace();
             this.getServer().getPluginManager().disablePlugin(this);
         }
-        pvpManager = new PvPManager(plugin,config.getStringList("pvp-disable-worlds"));
+        PvPManager pvpManager = new PvPManager(plugin, config.getStringList("pvp-disable-worlds"));
+        pvpManager.setServerPvPStatus(true);
         this.getServer().getPluginManager().registerEvents(new JoinEvent(pvpManager), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(pvpManager), this);
         this.getCommand("simplepvp").setExecutor(new MainCommand(plugin, pvpManager));
