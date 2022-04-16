@@ -16,11 +16,16 @@ public class PlayerDamageEvent implements Listener {
 
     @EventHandler
     public void onPlayerDamagePlayer(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player) && !(event.getEntity() instanceof Player)) return;
-        Player damaged = (Player) event.getEntity();
-        Player damager = (Player) event.getDamager();
-        if (damaged.hasPermission("simplepvp.bypass")) {
-            damager.sendMessage("§cYou can't damage this player!");
+        Player damaged = null;
+        if (event.getEntity() instanceof Player) {
+            damaged = (Player) event.getEntity();
+        }
+        Player damager = null;
+        if (event.getDamager() instanceof Player) {
+            damager = (Player) event.getDamager();
+        }
+        if (damaged == null || damager == null) return;
+        if (damager.hasPermission("simplepvp.bypass")) {
             return;
         }
         if (pvpManager.getServerPvPStatus()) {
