@@ -25,6 +25,7 @@ public class PlayerDamageEvent implements Listener {
         }
         if (pvpManager.getServerPvPStatus()) {
             event.setCancelled(true);
+            return;
         }
         if (pvpManager.getPlayerPvPStatus(damaged)) {
             event.setCancelled(true);
