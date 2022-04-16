@@ -4,6 +4,7 @@ import com.taggernation.simplepvp.commands.MainCommand;
 import com.taggernation.simplepvp.events.JoinEvent;
 import com.taggernation.simplepvp.events.PlayerDamageEvent;
 import com.taggernation.simplepvp.utils.ConfigManager;
+import com.taggernation.simplepvp.utils.Data;
 import com.taggernation.simplepvp.utils.PvPManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 public final class SimplePVP extends JavaPlugin {
 
     private ConfigManager config;
+    public Data data;
     @Override
     public void onEnable() {
         SimplePVP plugin = this;
@@ -23,10 +25,11 @@ public final class SimplePVP extends JavaPlugin {
         }
         PvPManager pvpManager = new PvPManager(plugin, config.getStringList("pvp-disable-worlds"));
         pvpManager.setServerPvPStatus(true);
+        data = new Data(config, pvpManager);
         this.getServer().getPluginManager().registerEvents(new JoinEvent(pvpManager), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(pvpManager), this);
-        this.getCommand("simplepvp").setExecutor(new MainCommand(plugin, pvpManager));
-        this.getCommand("simplepvp").setTabCompleter(new MainCommand(plugin, pvpManager));
+        this.getCommand("simplepvp").setExecutor(new MainCommand(plugin, pvpManager, config));
+        this.getCommand("simplepvp").setTabCompleter(new MainCommand(plugin, pvpManager, config));
         this.getLogger().info("Enabled " + plugin.getName() + " " + plugin.getDescription().getVersion() + "by Edward#1234 Successfully");
 
     }
