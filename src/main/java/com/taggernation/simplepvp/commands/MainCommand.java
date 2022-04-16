@@ -25,15 +25,17 @@ public class MainCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(args.length > 0)) {
-            if (sender.hasPermission("simplepvp.admin")) {
+            if (!sender.hasPermission("simplepvp.admin")) {
                 sender.sendMessage("You do not have permission to use this command");
                 return true;
             }
             if (!pvpManager.getServerPvPStatus()) {
+                pvpManager.setServerPvPStatus(true);
                 pvpManager.enablePVPForAll();
                 sender.sendMessage("Enabled PVP for all players");
                 return true;
             }
+            pvpManager.setServerPvPStatus(false);
             pvpManager.disablePVPForAll();
             sender.sendMessage("Disabled PVP for all players");
             return false;
@@ -56,7 +58,7 @@ public class MainCommand implements TabExecutor {
                 sender.sendMessage("You do not have permission to use this command");
                 return true;
             }
-            if (args[1] == null) {
+            if (args.length == 1) {
                 pvpManager.enablePVPForAll();
                 sender.sendMessage("Enabled pvp for all players");
                 return true;
@@ -83,7 +85,7 @@ public class MainCommand implements TabExecutor {
                 sender.sendMessage("You do not have permission to use this command");
                 return true;
             }
-            if (args[1] == null) {
+            if (args.length == 1) {
                 pvpManager.disablePVPForAll();
                 sender.sendMessage("Disabled pvp for all players");
                 return true;
@@ -126,9 +128,7 @@ public class MainCommand implements TabExecutor {
                 return players;
             }
             if (args[0].equals("disable")) {
-                pvpManager.getPlayers().forEach(player -> {
-                    players.add(player.getName());
-                });
+                pvpManager.getPlayers().forEach(player -> players.add(player.getName()));
                 return players;
             }
         }
