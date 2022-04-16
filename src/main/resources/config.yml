@@ -1,2 +1,5 @@
+prefix: "&e&lSimplePVP &c➜"
 pvp-disable-worlds:
   - world
+broadcast-status: true
+broadcast-message: "&a&lPvP is now &c&l%Status%&a&l!"
