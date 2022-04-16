@@ -16,6 +16,10 @@ public class JoinEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        if (!pvpManager.getServerPvPStatus()) {
+            pvpManager.disablePVP(player);
+            player.sendMessage("§cPvP is disabled on this server.");
+        }
         if (pvpManager.getPlayerPvPStatus(player)) {
             player.sendMessage("Your PvP is currently Disabled");
             return;
