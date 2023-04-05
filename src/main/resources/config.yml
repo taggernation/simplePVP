@@ -1,5 +1,10 @@
-prefix: "&e&lSimplePVP &c➜"
 pvp-disable-worlds:
   - world
-broadcast-status: true
-broadcast-message: "&a&lPvP is now &c&l%Status%&a&l!"
+pvp-disabled-whole-server: false
+pvp-disabled-players:
+  - 'Player1'
+  - 'Player2'
+pvp-bypass-permission: 'simplepvp.bypass'
+# will notify players when they are attacked if pvp is disabled
+pvp-notify-players: true
+

@@ -4,6 +4,7 @@ main: com.taggernation.simplepvp.SimplePVP
 authors: [ Edward ]
 description: Discord/Enable PVP
 website: https://taggernation.com
+api-version: 1.19
 commands:
   simplePVP:
     description: PvP command

@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class MainCommand implements TabExecutor {
                 try {
                     config.reload();
                     sender.sendMessage(plugin.data.format("Config reloaded"));
-                } catch (IOException | InvalidConfigurationException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
                 return true;
@@ -132,7 +133,7 @@ public class MainCommand implements TabExecutor {
 
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
         List<String> players = new ArrayList<>();
         if (args.length == 1) {
             return baseCommand;

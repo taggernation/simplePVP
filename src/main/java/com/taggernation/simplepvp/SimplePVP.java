@@ -4,8 +4,9 @@ import com.taggernation.simplepvp.commands.MainCommand;
 import com.taggernation.simplepvp.events.JoinEvent;
 import com.taggernation.simplepvp.events.PlayerDamageEvent;
 import com.taggernation.simplepvp.utils.ConfigManager;
-import com.taggernation.simplepvp.utils.Data;
+import com.taggernation.simplepvp.utils.MainConfig;
 import com.taggernation.simplepvp.utils.PvPManager;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -13,10 +14,12 @@ import java.io.IOException;
 public final class SimplePVP extends JavaPlugin {
 
     private ConfigManager config;
-    public Data data;
+    public MainConfig data;
+    public MiniMessage mm;
     @Override
     public void onEnable() {
         SimplePVP plugin = this;
+        mm = MiniMessage.miniMessage();
         try {
             config = new ConfigManager(plugin, "config.yml", false, true);
         } catch (IOException e) {
@@ -25,7 +28,11 @@ public final class SimplePVP extends JavaPlugin {
         }
         PvPManager pvpManager = new PvPManager(plugin, config.getStringList("pvp-disable-worlds"));
         pvpManager.setServerPvPStatus(true);
-        data = new Data(config, pvpManager);
+        try {
+            data = new MainConfig(this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.getServer().getPluginManager().registerEvents(new JoinEvent(pvpManager), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(pvpManager), this);
         this.getCommand("simplepvp").setExecutor(new MainCommand(plugin, pvpManager, config));

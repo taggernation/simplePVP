@@ -1,0 +1,27 @@
+
+# Supports MiniMessage formatting
+message:
+  Prefix: "<yellow><b>SimplePVP</b></yellow> <red>➜</red>"
+  No_Permission: "<gray>You do not have permission to use this command!</gray>"
+
+  Server_PvP_Enabled: "<gray>PvP is now <green><b>Enabled</b></green>!</gray>"
+  Server_PvP_Disabled: "<gray>PvP is now <red><b>Disabled</b></red>!</gray>"
+
+  World_PvP_Enabled: "<gray>PvP is now <green><b>Enabled</b></green>! in this world</gray>"
+  World_PvP_Disabled: "<gray>PvP is now <red><b>Disabled</b></red>! in this world</gray>"
+  World_PvP_Enabled_Other: "<gray>PvP is now <green><b>Enabled</b></green>! in world <yellow>%World%</yellow></gray>"
+  World_PvP_Disabled_Other: "<gray>PvP is now <red><b>Disabled</b></red>! in world <yellow>%World%</yellow></gray>"
+
+  Player_PvP_Enabled: "<gray>PvP is now <green><b>Enabled</b></green>!</gray>"
+  Player_PvP_Disabled: "<gray>PvP is now <red><b>Disabled</b></red>!</gray>"
+  Player_PvP_Enabled_Other: "<gray>PvP is now <green><b>Enabled</b></green>! for <yellow>%Player%</yellow></gray>"
+  Player_PvP_Disabled_Other: "<gray>PvP is now <red><b>Disabled</b></red>! for <yellow>%Player%</yellow></gray>"
+
+  Title_Message:
+    On_Disabled:
+      title: "<red><b>✘</b></red>"
+      subtitle: "<gray>PvP is now <red><b>Disabled</b></red>!</gray>"
+
+# DO NOT TOUCH
+version: 1.0
+
